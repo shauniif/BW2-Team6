@@ -1,4 +1,8 @@
 using BW2_Team6.Context;
+using BW2_Team6.Services.Classes;
+using BW2_Team6.Services.Interfaces;
+using BW2_Team6.Services.Password_Crypth_Implementations;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,12 +10,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(opt => opt.LoginPath = "/Auth/Login");
+
+
 var conn = builder.Configuration.GetConnectionString("SqlServer")!;
 builder.Services
     .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn))
     ;
 
-
+builder.Services
+    .AddScoped<IRoleService, RoleService>()
+    .AddScoped<IAuthService, AuthService>()
+    .AddScoped<IPasswordEnconder, PassowordEnconder>()
+    ;
 
 var app = builder.Build();
 
