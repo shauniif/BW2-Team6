@@ -6,7 +6,7 @@ Nome
 Tipologia
 ColoreMantello
 DataDiNascita
-Microchip 
+Microchip  // UNIQUE
 IdProprietario 
 
 - Proprietario
@@ -38,25 +38,26 @@ IdProdotto
 Nome
 Tipo
 Uso
-IdDitta
+IdDitta // Manca
 
 - Ditta
 
 Id
 Recapito
 Nome
-Email
+Indirizzo
 
 - Vendita
 
 Id
 IdProprietario
 IdProdotto
-NumeroRicetta
+NumeroRicetta // UNIQUE
 
 - Armadietto
 Id
-NumeroArmadietto
+NumeroArmadietto // UNIQUE
+
 
 - Cassetti
 Id
