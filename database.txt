@@ -1,0 +1,63 @@
+- Animale
+
+Id
+DataDiRegistrazione
+Nome
+Tipologia
+ColoreMantello
+DataDiNascita
+Microchip
+IdProprietario 
+
+- Proprietario
+
+Id
+Nome
+Cognome
+NumeroCellulare
+Email
+
+- Visita
+
+IdVisita
+IdAnimale
+Data
+TipoEsame
+Cura
+
+- Ricovero
+
+Id
+IdAniamle (FK)
+DataDiRicovero
+ImgURL
+
+- Farmacia
+
+Id
+IdProdotto
+NomeProdotto
+Tipo
+Uso
+
+- Ditta
+
+Id
+Recapito
+Nome
+Email
+
+- Vendita
+
+Id
+IdProprietario
+
+
+
+
+
+
+
+
+
+
