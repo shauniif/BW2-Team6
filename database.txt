@@ -6,7 +6,7 @@ Nome
 Tipologia
 ColoreMantello
 DataDiNascita
-Microchip
+Microchip 
 IdProprietario 
 
 - Proprietario
@@ -32,13 +32,13 @@ IdAniamle (FK)
 DataDiRicovero
 ImgURL
 
-- Farmacia
+- Prodotto
 
-Id
 IdProdotto
-NomeProdotto
+Nome
 Tipo
 Uso
+IdDitta
 
 - Ditta
 
@@ -51,9 +51,25 @@ Email
 
 Id
 IdProprietario
+IdProdotto
+NumeroRicetta
+
+- Armadietto
+Id
+NumeroArmadietto
+
+- Cassetti
+Id
+IdProdotto
+IdArmadietto
 
 
+- User
 
+
+- Role
+
+- UserRole
 
 
 
