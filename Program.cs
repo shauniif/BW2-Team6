@@ -24,6 +24,7 @@ builder.Services
     .AddScoped<IRoleService, RoleService>()
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<IPasswordEnconder, PassowordEnconder>()
+    .AddScoped<IOwnerService, OwnerService>()
     ;
 
 var app = builder.Build();
