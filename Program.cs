@@ -1,3 +1,4 @@
+using BW2_Team6;
 using BW2_Team6.Context;
 using BW2_Team6.Services.Classes;
 using BW2_Team6.Services.Interfaces;
@@ -14,7 +15,14 @@ builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(opt => opt.LoginPath = "/Auth/Login");
 
-
+builder.Services.
+              AddAuthorization(opt =>
+              {
+                  opt.AddPolicy(Policies.LoggedIn, cfg => cfg.RequireAuthenticatedUser());
+                  opt.AddPolicy(Policies.IsAdmin, cfg => cfg.RequireRole("Admin"));
+                  opt.AddPolicy(Policies.IsVeterinarian, cfg => cfg.RequireRole("Veterinario"));
+                  opt.AddPolicy(Policies.IsPharmacist, cfg => cfg.RequireRole("Farmacista"));
+              });
 var conn = builder.Configuration.GetConnectionString("SqlServer")!;
 builder.Services
     .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn))
