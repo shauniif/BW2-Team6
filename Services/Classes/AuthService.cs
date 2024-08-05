@@ -33,7 +33,7 @@ namespace BW2_Team6.Services.Classes
             return user;
         }
 
-        public async Task<User> Create(UserViewModel entity)
+        public async Task<User> Create(UserViewModel entity, IEnumerable<int> roleSelected)
         {
             var user = new User
             {
@@ -41,7 +41,11 @@ namespace BW2_Team6.Services.Classes
                 Email = entity.Email,
                 Password = _passwordEncoder.Encode(entity.Password),
             };
-            
+            var roles = await _db.Roles.Where(r => roleSelected.Contains(r.Id)).ToListAsync();
+            foreach (var role in roles)
+            {
+                user.Roles.Add(role);
+            };
 
             await _db.Users.AddAsync(user);
             await _db.SaveChangesAsync();

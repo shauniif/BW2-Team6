@@ -4,7 +4,7 @@ namespace BW2_Team6.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<User> Create(UserViewModel entity);
+        Task<User> Create(UserViewModel entity, IEnumerable<int> roleSelected);
         Task<User> Delete(int id);
 
         Task<IEnumerable<User>> GetAll();

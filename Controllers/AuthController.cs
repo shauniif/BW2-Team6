@@ -74,19 +74,22 @@ namespace BW2_Team6.Controllers
             }
 
             [AllowAnonymous]
-            public IActionResult Register()
+            public async Task<IActionResult> Register()
             {
-                return View();
+            var roles = await _roleSvc.GetAll();
+            ViewBag.Roles = roles;
+            return View();
             }
 
             [HttpPost]
             [ValidateAntiForgeryToken]
             [AllowAnonymous]
-            public async Task<IActionResult> Register(UserViewModel user)
-            {
+            public async Task<IActionResult> Register(UserViewModel user, IEnumerable<int> roleSelected)
+            {   
+                
                 if (ModelState.IsValid)
                 {
-                    await _authSvc.Create(user);
+                    await _authSvc.Create(user, roleSelected);
                     return RedirectToAction("Login", "Auth");
                 }
                 return View();
@@ -171,7 +174,8 @@ namespace BW2_Team6.Controllers
             }
 
             public async Task<IActionResult> AddRoleToUser(int userid, string roleName)
-            {
+            {   
+                
                 await _authSvc.AddRoleToUser(userid, roleName);
                 return RedirectToAction("AllUsers", "Auth");
             }

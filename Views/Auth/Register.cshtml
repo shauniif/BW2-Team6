@@ -2,10 +2,11 @@
 
 @{
     ViewData["Title"] = "Register";
+    var roles = ViewBag.Roles;
 }
 
 <h1>Register</h1>
-<>
+
 <h4>User</h4>
 <hr />
 <div class="row">
@@ -28,7 +29,11 @@
                 <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-
+            @foreach (var role in roles)
+            {
+                <input type="checkbox" id="roleSelected" name="roleSelected" value="@role.Id" />
+                <label>@role.Name</label>
+            }
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
