@@ -53,15 +53,20 @@ namespace BW2_Team6.Services.Classes
 
         }
 
-        public Task<IEnumerable<Visit>> GetAll()
+        public async Task<IEnumerable<Visit>> GetAll()
         {
-            throw new NotImplementedException();
+            var visits = await _db.Visits
+                .AsNoTracking()
+                .Include(v => v.Animal)
+                .ToListAsync();
+            return visits;
         }
 
         public async Task<Visit> GetById(int id)
         {
             var visit = await _db.Visits
                 .AsNoTracking()
+                .Include(v => v.Animal)
                 .FirstOrDefaultAsync(v => v.Id == id);
             if (visit == null)
             {
@@ -77,6 +82,7 @@ namespace BW2_Team6.Services.Classes
                 visit.TypeOfExam = entity.TypeOfExam;
                 visit.TypeOfCure = entity.TypeOfCure;
                 _db.Visits.Update(visit);
+                await _db.SaveChangesAsync();
                 return visit;
 
             }
