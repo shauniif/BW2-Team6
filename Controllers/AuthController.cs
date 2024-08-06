@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsAdmin)]
     public class AuthController : Controller
     {
         
