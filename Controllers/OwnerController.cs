@@ -44,8 +44,14 @@ namespace BW2_Team6.Controllers
 
         }
 
-        [HttpPut]
-        public async Task<ActionResult<Owner>> UpdateOwner(int id, Owner owner)
+        public async Task<IActionResult> EditOwner(int id)
+        {
+            var owner = await _ownerService.Read(id);
+            return View(owner);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Owner>> EditOwner(int id, Owner owner)
         {
             var updatedOwner = await _ownerService.Update(id, owner);
             if (updatedOwner == null)
