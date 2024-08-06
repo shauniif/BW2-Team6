@@ -31,7 +31,7 @@ builder.Services
 builder.Services
     .AddScoped<IRoleService, RoleService>()
     .AddScoped<IAuthService, AuthService>()
-    .AddScoped<IPasswordEnconder, PassowordEnconder>();
+    .AddScoped<IPasswordEnconder, PassowordEnconder>()
     .AddScoped<IOwnerService, OwnerService>()
     ;
 
