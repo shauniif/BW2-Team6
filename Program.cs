@@ -33,6 +33,7 @@ builder.Services
     .AddScoped<IAuthService, AuthService>()
     .AddScoped<IPasswordEnconder, PassowordEnconder>()
     .AddScoped<IOwnerService, OwnerService>()
+    .AddScoped<IAnimalService, AnimalService>()
     ;
 
 var app = builder.Build();

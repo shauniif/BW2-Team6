@@ -65,7 +65,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Animals");
+                    b.ToTable("Animals", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Company", b =>
@@ -92,7 +92,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Drawer", b =>
@@ -115,7 +115,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Drawers");
+                    b.ToTable("Drawers", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Locker", b =>
@@ -135,7 +135,7 @@ namespace BW2_Team6.Migrations
                     b.HasIndex("NumberLocker")
                         .IsUnique();
 
-                    b.ToTable("Locker");
+                    b.ToTable("Locker", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Owner", b =>
@@ -171,7 +171,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owners");
+                    b.ToTable("Owners", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Product", b =>
@@ -204,7 +204,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Recover", b =>
@@ -229,7 +229,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasIndex("AnimalId");
 
-                    b.ToTable("Recovers");
+                    b.ToTable("Recovers", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Role", b =>
@@ -247,7 +247,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Sell", b =>
@@ -277,7 +277,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Sells");
+                    b.ToTable("Sells", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.User", b =>
@@ -303,7 +303,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BW2_Team6.Models.Visit", b =>
@@ -334,7 +334,7 @@ namespace BW2_Team6.Migrations
 
                     b.HasIndex("AnimalId");
 
-                    b.ToTable("Visits");
+                    b.ToTable("Visits", (string)null);
                 });
 
             modelBuilder.Entity("RoleUser", b =>
