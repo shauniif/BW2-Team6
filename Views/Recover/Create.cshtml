@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var animalIds = ViewBag.AnimalId;
 }
 
 <h1>Create</h1>
@@ -11,6 +12,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
+            <input type="hidden" id="animalId" name="animalId" value="@animalIds" />
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
                 <input asp-for="Image" type="file" class="form-control" />

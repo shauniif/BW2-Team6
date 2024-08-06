@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BW2_Team6.Services.Classes
 {
-    public class RevoverService : IRecoverService
+    public class RecoverService : IRecoverService
     {
 
         private readonly DataContext _db;
 
-        public RevoverService(DataContext db)
+        public RecoverService(DataContext db)
         {
             _db = db;
         }

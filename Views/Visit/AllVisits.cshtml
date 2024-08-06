@@ -21,15 +21,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.TypeOfCure)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Animal)
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateVisit)
             </td>
@@ -40,9 +39,11 @@
                 @Html.DisplayFor(modelItem => item.TypeOfCure)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.DisplayFor(modelItem => item.Animal.Name)
+            </td>
+            <td>
+                    @Html.ActionLink("Update", "Update", new { id= item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
 }

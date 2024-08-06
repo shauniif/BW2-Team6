@@ -12,6 +12,13 @@
     <div class="col-md-4">
         <form asp-action="Update" enctype="multipart/form-data">
             <div class="form-group">
+                <div>
+                    <label>Existing Image</label>
+                    @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
+                    {
+                        <img src="@Model.ExistingImagePath" alt="Existing Image" />
+                    }
+                </div>
                 <label asp-for="Image" class="control-label"></label>
                 <input asp-for="Image" type="file" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>

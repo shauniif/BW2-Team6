@@ -11,7 +11,6 @@ namespace BW2_Team6.Services.Interfaces
         Task<Visit> Create(int animalId,VisitViewModel entity);
         Task<Visit> Update(int id,VisitViewModel entity);
         Task<Visit> Delete(int id);
-
-
+        Task<IEnumerable<Visit>> AllVisitByAnimalId(int animalId);
     }
 }

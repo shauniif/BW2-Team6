@@ -18,8 +18,9 @@ namespace BW2_Team6.Controllers
             return View(recovers);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            ViewBag.animalId = id;
             return View();
         }
 
@@ -40,15 +41,26 @@ namespace BW2_Team6.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var recover = await _recoverSvc.Read(id);
-            return View(recover);
+            var recoverModel = new RecoverViewModel
+            {
+                ExistingImagePath = recover.Image,
+            };
+            return View(recoverModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, RecoverViewModel entity)
         {
-            var recover = await _recoverSvc.Update(id, entity);
-            return View(recover);
+            if (ModelState.IsValid)
+            {
+                var recover = await _recoverSvc.Update(id, entity);
+               return RedirectToAction("AllRecovers", "Recover");
+            }
+            else
+            {
+                return View(entity);
+            }
         }
 
         public async Task<IActionResult> Delete(int id)

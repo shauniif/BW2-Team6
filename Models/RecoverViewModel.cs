@@ -2,6 +2,7 @@
 {
     public class RecoverViewModel
     {
+        public string? ExistingImagePath { get; set; }
         public IFormFile Image { get; set; }
     }
 }

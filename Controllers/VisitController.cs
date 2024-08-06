@@ -17,8 +17,9 @@ namespace BW2_Team6.Controllers
             return View(visits);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            ViewBag.animalId = id;
             return View();
         }
 
@@ -37,7 +38,12 @@ namespace BW2_Team6.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var visit = await _visitSvc.GetById(id);
-            return View(visit);
+            var visitsModel = new VisitViewModel
+            {
+                TypeOfCure = visit.TypeOfCure,
+                TypeOfExam = visit.TypeOfExam,
+            };
+            return View(visitsModel);
         }
 
         [HttpPost]
@@ -62,6 +68,13 @@ namespace BW2_Team6.Controllers
             await _visitSvc.Delete(id);
             return RedirectToAction("AllVisits", "Visit");
 
+        }
+
+        public async Task<IActionResult> DetailsVisit(int id)
+        {
+
+            var visits = await _visitSvc.AllVisitByAnimalId(id);
+            return Json(visits);
         }
     }
 }

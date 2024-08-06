@@ -37,8 +37,7 @@
         </dd>
     </dl>
     
-    <form asp-action="DeleteConfirmed">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
