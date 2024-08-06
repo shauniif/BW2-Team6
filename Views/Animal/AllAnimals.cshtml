@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BW2_Team6.Models.Animal>
+
+@{
+    ViewData["Title"] = "Lista degli animali";
+}
+
+<h1>Lista degli animali</h1>
+
+<p>
+    <a asp-action="Create">Aggiungi un nuovo animale</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Microchip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fur)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Microchip)
+                </td>
+                @if (item.Owner != null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner.FirstName)
+                    </td>
+                }
+                else
+                {
+                    <td>Nessun propietario</td>
+                }
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Modifica</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
