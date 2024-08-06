@@ -24,10 +24,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Views\Animal\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Animal\" />
-  </ItemGroup>
 </Project>
