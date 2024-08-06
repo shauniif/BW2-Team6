@@ -15,18 +15,19 @@ namespace BW2_Team6.Models
         public required string LastName { get; set; }
 
         [Column(TypeName = "char(10)")]
-        public string NumberPhone { get; set; }
+        public string? NumberPhone { get; set; }
 
+        [EmailAddress]
         [StringLength(80)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Required]
         [Column(TypeName = "char(16)")]
         public required string FiscalCode { get; set; }
 
-        public List<Animal> Animals { get; set; } = [];
+        public List<Animal> Animals { get; set; } = new List<Animal>();
 
-        public List<Sell> Sells { get; set; } = [];
+        public List<Sell> Sells { get; set; } = new List<Sell>();
 
 
     }

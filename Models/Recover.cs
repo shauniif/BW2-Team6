@@ -13,6 +13,6 @@ namespace BW2_Team6.Models
 
         public required DateTime DateRecover { get; set; }
 
-        public string Image {  get; set; }
+        public string? Image {  get; set; }
     }
 }

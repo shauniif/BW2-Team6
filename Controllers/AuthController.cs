@@ -132,7 +132,6 @@ namespace BW2_Team6.Controllers
                     var claims = new List<Claim>
                      {
                      new Claim(ClaimTypes.Name, u.Name),
-                     new Claim(ClaimTypes.Email, u.Email)
                      };
                     u.Roles.ForEach(r => claims.Add(new Claim(ClaimTypes.Role, r.Name)));
 
