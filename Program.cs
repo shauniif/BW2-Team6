@@ -1,5 +1,6 @@
 using BW2_Team6;
 using BW2_Team6.Context;
+using BW2_Team6.Services;
 using BW2_Team6.Services.Classes;
 using BW2_Team6.Services.Interfaces;
 using BW2_Team6.Services.Password_Crypth_Implementations;
@@ -34,6 +35,7 @@ builder.Services
     .AddScoped<IPasswordEnconder, PassowordEnconder>()
     .AddScoped<IOwnerService, OwnerService>()
     .AddScoped<IAnimalService, AnimalService>()
+    .AddScoped<IPharmacyService, PharmacyService>()
     ;
 
 var app = builder.Build();
