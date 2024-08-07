@@ -34,6 +34,8 @@ builder.Services
     .AddScoped<IPasswordEnconder, PassowordEnconder>()
     .AddScoped<IOwnerService, OwnerService>()
     .AddScoped<IAnimalService, AnimalService>()
+    .AddScoped<IVisitService, VisitService>()
+    .AddScoped<IRecoverService, RecoverService>()
     ;
 
 var app = builder.Build();

@@ -91,5 +91,17 @@ namespace BW2_Team6.Services.Classes
                 throw new Exception("Creation failed", ex);
             } 
         }
+
+        public async Task<IEnumerable<Visit>> AllVisitByAnimalId(int animalId)
+        {
+            var visits = await _db.Visits
+                .Include(v => v.Animal)
+                .Where(v => v.Animal.Id == animalId)
+                .OrderByDescending(v => v.DateVisit)
+                .ToListAsync();
+            return visits;
+
+        }
+
     }
 }

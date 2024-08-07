@@ -65,11 +65,53 @@
 
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Modifica</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Elimina</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Elimina</a> |
+                    <a asp-action="ViewDetailAnimal" asp-controller="Visit"></a>
+                    <button type="button" class="btn btn-primary" data-animal-id="@item.Id" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Vedi tutte le visite di @item.Name
+                    </button>
+                    <a data-toggle="modal" data-target="#exampleModal"></a>
+                @if(item.Owner == null)
+                {
+                    <a asp-action="Create" asp-controller="Recover" asp-route-id="@item.Id">Registra ricovero animale smarrito</a>
+                }
                 </td>
+                
             </tr>
         }
     </tbody>
 </table>
 
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Visite dell'Animale</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Data Visita</th>
+                            <th>Esame Obiettivo</th>
+                            <th>Cura Prescritta</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitsTableBody">
+                        <!-- I dati delle visite verranno inseriti qui -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                <div id="buttonVisit">
+               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
