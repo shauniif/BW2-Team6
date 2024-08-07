@@ -12,9 +12,30 @@ namespace BW2_Team6.Services.Classes
         {
             _db = db;
         }
-        public Task<Drawer> Create(Drawer entity)
+        public async Task<Drawer> Create(DrawerViewModel entity)
         {
-            throw new NotImplementedException();
+            var locker = await _db.Locker.FirstOrDefaultAsync(l => l.Id == entity.LockerId);
+            if (locker == null)
+            {
+                throw new Exception("locker not found");
+            }
+            var products = new List<Product>();  
+            foreach (var id in entity.productsId) {
+                var product = _db.Products.FirstOrDefault(p => p.Id == id);
+                if (product == null) {
+                    throw new Exception("product not found");
+                }
+                products.Add(product);
+            }
+
+            var drawer = new Drawer();
+
+            drawer.Locker = locker;
+            drawer.Product = products;
+
+            await _db.Drawers.AddAsync(drawer);
+            await _db.SaveChangesAsync();
+            return drawer;
         }
 
         public async Task<Drawer> Delete(int id)
@@ -46,15 +67,32 @@ namespace BW2_Team6.Services.Classes
             return drawer;
         }
 
-        public async Task<Drawer> Update(int id, Drawer entity)
+        public async Task<Drawer> Update(int id, DrawerViewModel entity)
         {
             var drawer = await Read(id);
-            drawer.Locker = entity.Locker;
-            drawer.Product = entity.Product;
-            drawer.Locker = entity.Locker;
-            _db.Drawers.Add(drawer);
+            var locker = await _db.Locker.FirstOrDefaultAsync(l => l.Id == entity.LockerId);
+            if (locker == null)
+            {
+                throw new Exception("locker not found");
+            }
+            var products = new List<Product>();
+            foreach (var idproduct in entity.productsId)
+            {
+                var product = _db.Products.FirstOrDefault(p => p.Id == idproduct);
+                if (product == null)
+                {
+                    throw new Exception("product not found");
+                }
+                products.Add(product);
+            }
+
+            drawer.Locker = locker;
+            drawer.Product = products;
+
+            _db.Drawers.Update(drawer);
             await _db.SaveChangesAsync();
             return drawer;
+
         }
     }
 }

@@ -46,6 +46,11 @@ namespace BW2_Team6.Context
             modelBuilder.Entity<Locker>()
                 .HasIndex(s => s.NumberLocker)
                 .IsUnique();
+
+            modelBuilder.Entity<Drawer>()
+                .HasMany(d => d.Product)
+                .WithMany(u => u.Drawers)
+                .UsingEntity(j => j.ToTable("DrawerProduct"));
         }
     }
 }
