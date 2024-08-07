@@ -11,17 +11,21 @@ namespace BW2_Team6.Controllers
     {
         private readonly IPharmacyService _pharmacyService;
         private readonly ICompaniesService _companiesSvc;
+        private readonly IOwnerService _ownerService;
 
-        public PharmacyController(IPharmacyService pharmacyService, ICompaniesService companiesService)
+        public PharmacyController(IPharmacyService pharmacyService, ICompaniesService companiesService, IOwnerService ownerService)
         {
             _pharmacyService = pharmacyService;
             _companiesSvc = companiesService;
+            _ownerService = ownerService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> AllProducts()
         {
             var products = await _pharmacyService.GetAllProducts();
+            var owner = await _ownerService.GetAll();
+            ViewBag.Owners = new SelectList(owner, "Id", "FirstName");
             return View(products);
         }
 
@@ -30,6 +34,7 @@ namespace BW2_Team6.Controllers
         {
             var companies = await _companiesSvc.GetAll();
             ViewBag.Companies = new SelectList(companies, "Id", "Name");
+
             return View();
         }
 

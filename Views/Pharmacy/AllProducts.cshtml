@@ -58,6 +58,16 @@
             }
         </tbody>
     </table>
+    <div class="form-group">
+        <label for="OwnerId">Seleziona cliente</label>
+        <select id="OwnerId" name="OwnerId" class="form-control" asp-items="ViewBag.Owners">
+            <option value="0">-- Seleziona Cliente --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="NumberOfRecipe">Numero di ricetta</label>
+        <input type="text" id="NumberOfRecipe" name="numberOfRecipe" class="form-control" />
+    </div>
     <button type="submit">Procedi con la vendita</button>
 </form>
 
