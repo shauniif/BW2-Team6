@@ -20,7 +20,7 @@ namespace BW2_Team6.Services
 
         public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            return await _db.Products.ToListAsync();
+            return await _db.Products.Include(p => p.Company).ToListAsync();
         }
 
         public async Task<Product> GetProductById(int id)

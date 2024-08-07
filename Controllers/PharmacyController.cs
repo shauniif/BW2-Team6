@@ -1,6 +1,7 @@
 ﻿using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,10 +10,12 @@ namespace BW2_Team6.Controllers
     public class PharmacyController : Controller
     {
         private readonly IPharmacyService _pharmacyService;
+        private readonly ICompaniesService _companiesSvc;
 
-        public PharmacyController(IPharmacyService pharmacyService)
+        public PharmacyController(IPharmacyService pharmacyService, ICompaniesService companiesService)
         {
             _pharmacyService = pharmacyService;
+            _companiesSvc = companiesService;
         }
 
         [HttpGet]
@@ -23,20 +26,31 @@ namespace BW2_Team6.Controllers
         }
 
 
-        public IActionResult CreateProduct()
+        public async Task<IActionResult> CreateProduct()
         {
+            var companies = await _companiesSvc.GetAll();
+            ViewBag.Companies = new SelectList(companies, "Id", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProduct(Product product)
+        public async Task<IActionResult> CreateProduct(Product product, int companyId)
         {
+            if (companyId == 0)
+            {
+                ModelState.AddModelError("Company", "Please select a company.");
+            }
+
             if (ModelState.IsValid)
             {
+                product.Company = await _companiesSvc.Read(companyId);
                 await _pharmacyService.CreateProduct(product);
                 return RedirectToAction("AllProducts");
             }
+
+            var companies = await _companiesSvc.GetAll();
+            ViewBag.Companies = new SelectList(companies, "Id", "Name");
             return View(product);
         }
 
