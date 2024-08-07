@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TypeOfUse)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company.Name)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,11 +45,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TypeOfUse)
             </td>
-            @*Mettere il nome della compagnia*@
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Company.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProduct", new {  id=item.Id }) 
+                @Html.ActionLink("Detail", "DetailProduct", new {  id=item.Id }) 
+                @Html.ActionLink("Delete", "DeleteProduct", new {  id=item.Id })
             </td>
         </tr>
 }
