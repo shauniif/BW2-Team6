@@ -25,7 +25,7 @@ namespace BW2_Team6.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(Locker locker)
+        public async Task<IActionResult> Create(LockerViewModel locker)
         {
             if(ModelState.IsValid)
             {
@@ -36,11 +36,11 @@ namespace BW2_Team6.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var locker = await _lockerSvc.Read(id);
+            var locker = await _lockerSvc.ReadV(id);
             return View(locker);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Locker locker)
+        public async Task<IActionResult> Update(int id, LockerViewModel locker)
         {
             if (ModelState.IsValid)
             {

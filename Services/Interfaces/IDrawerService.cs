@@ -13,6 +13,6 @@ namespace BW2_Team6.Services.Classes
 
         Task<Drawer> Delete(int id);
 
-
+       Task<Drawer> SearchProduct(int id);
     }
 }

@@ -11,6 +11,6 @@ namespace BW2_Team6.Models
 
         [Required]
         public Locker Locker { get; set; }
-        public List<Product> Product { get; set; } = [];
+        public List<DrawerProduct> Product { get; set; } = [];
     }
 }

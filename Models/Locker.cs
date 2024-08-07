@@ -11,6 +11,6 @@ namespace BW2_Team6.Models
         [Required]
         [Column(TypeName = "char(10)")]
         public required string NumberLocker {  get; set; }
-        public List<Drawer> Drawer { get; set; } = [];
+       // public List<Drawer> Drawer { get; set; } = [];
     }
 }

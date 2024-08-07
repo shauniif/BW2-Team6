@@ -4,12 +4,16 @@ namespace BW2_Team6.Services.Interfaces
 {
     public interface ILockerService
     {
-        Task<IEnumerable<Locker>> GetAll();
+        Task<IEnumerable<LockerViewModel>> GetAll();
 
-        Task<Locker> Create(Locker entity);
-        Task<Locker> Update(int id, Locker entity);
+        Task<Locker> Create(LockerViewModel entity);
+        Task<Locker> Update(int id, LockerViewModel entity);
        
         Task<Locker> Read(int id);
+
+        Task<LockerViewModel> ReadV(int id);
         Task<Locker> Delete(int id);
+
+        
     }
 }

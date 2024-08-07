@@ -53,11 +53,11 @@ namespace BW2_Team6.Controllers
             ViewBag.Products = product;
             ViewBag.Lockers = lockers;
             var drawer = await _drawerSvc.Read(id);
-            var productIds = drawer.Product.Select(p => p.Id).ToList();
+           // var productIds = drawer.Product.Product.Select(p => p.Id).ToList();
             var drawerV = new DrawerViewModel
             {
                 LockerId = drawer.Locker.Id,
-                productsId = productIds,
+            //    productsId = productIds,
                 
             };
             

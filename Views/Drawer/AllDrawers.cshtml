@@ -32,12 +32,12 @@
                     Armadietto n°: @Html.DisplayFor(modelItem => item.Locker.NumberLocker)
             </td>
             <td>
-                    <ul class="list-unstyled">
+               <ul class="list-unstyled">
                 @foreach(var product in item.Product)
                 {
-                            <li>@product.Name</li>
-                        }
-                    </ul>
+                            <li>@product.Product.Name</li>
+                }
+                    </ul> 
             </td>
             <td>
                     @Html.ActionLink("Update", "Update", new { id = item.Id }) |

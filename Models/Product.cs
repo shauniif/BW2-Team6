@@ -21,6 +21,6 @@ namespace BW2_Team6.Models
 
       //  public List<Sell> Sells { get; set; } = new List<Sell>();
 
-        public List<Drawer> Drawers { get; set; }
+        public List<DrawerProduct> Drawer { get; set; }
     }
 }

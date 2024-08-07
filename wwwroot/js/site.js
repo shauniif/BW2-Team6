@@ -1,5 +1,6 @@
 ﻿let pathVisit = '/api/VisitApi';
 let pathRecover = '/api/RecoverApi'
+let parLocker = '/api/LockerApi'
 $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); 
     var animalId = button.data('animal-id'); 

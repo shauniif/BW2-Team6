@@ -1,6 +1,8 @@
 ﻿using BW2_Team6.Context;
 using BW2_Team6.Models;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.Arm;
 
 namespace BW2_Team6.Services.Classes
 {
@@ -19,13 +21,14 @@ namespace BW2_Team6.Services.Classes
             {
                 throw new Exception("locker not found");
             }
-            var products = new List<Product>();  
+
+            var products = new List<DrawerProduct>();  
             foreach (var id in entity.productsId) {
                 var product = _db.Products.FirstOrDefault(p => p.Id == id);
                 if (product == null) {
                     throw new Exception("product not found");
                 }
-                products.Add(product);
+                products.Add(new DrawerProduct { Product = product });
             }
 
             var drawer = new Drawer();
@@ -51,6 +54,7 @@ namespace BW2_Team6.Services.Classes
             var drawers = await _db.Drawers
                 .Include(d => d.Locker)
                 .Include(d => d.Product)
+                .ThenInclude(dp => dp.Product)
                 .ToListAsync();
             return drawers;
         }
@@ -75,16 +79,19 @@ namespace BW2_Team6.Services.Classes
             {
                 throw new Exception("locker not found");
             }
-            var products = new List<Product>();
-            foreach (var idproduct in entity.productsId)
+
+            var products = new List<DrawerProduct>();
+            foreach (var singleproductId in entity.productsId)
             {
-                var product = _db.Products.FirstOrDefault(p => p.Id == idproduct);
+                var product = _db.Products.FirstOrDefault(p => p.Id == singleproductId);
                 if (product == null)
                 {
                     throw new Exception("product not found");
                 }
-                products.Add(product);
+                products.Add(new DrawerProduct { Product = product });
             }
+
+            
 
             drawer.Locker = locker;
             drawer.Product = products;
@@ -93,6 +100,41 @@ namespace BW2_Team6.Services.Classes
             await _db.SaveChangesAsync();
             return drawer;
 
+        }
+
+        public async Task<Drawer> SearchProduct(int id)
+        {
+            var drawer = await _db.Drawers
+          .Include(d => d.Locker)
+          .Include(d => d.Product)
+          .ThenInclude(dp => dp.Product)
+          .Where(d => d.Product.Any(p => p.ProductId == id))
+          .Select(d => new Drawer
+          {
+              Id = d.Id,
+              Locker = new Locker
+              {
+                  Id = d.Locker.Id,
+                  NumberLocker = d.Locker.NumberLocker
+              },
+              Product = d.Product.Select(dp => new DrawerProduct
+              {
+                  ProductId = dp.ProductId,
+                  Product = new Product
+                  {
+                      Id = dp.Product.Id,
+                      Name = dp.Product.Name
+                  }
+              }).ToList()
+          })
+          .FirstOrDefaultAsync();
+
+            if (drawer == null)
+            {
+                throw new Exception("drawer not found");
+            }
+
+            return drawer;
         }
     }
 }

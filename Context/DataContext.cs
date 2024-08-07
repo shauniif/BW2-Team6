@@ -23,6 +23,8 @@ namespace BW2_Team6.Context
         public virtual DbSet<Locker> Locker { get; set; }
         public virtual DbSet<Drawer> Drawers { get; set; }
 
+        public DbSet<DrawerProduct> DrawerProducts { get; set; }
+
         public DataContext(DbContextOptions<DataContext> opt) : base(opt) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,10 +49,18 @@ namespace BW2_Team6.Context
                 .HasIndex(s => s.NumberLocker)
                 .IsUnique();
 
-            modelBuilder.Entity<Drawer>()
-                .HasMany(d => d.Product)
-                .WithMany(u => u.Drawers)
-                .UsingEntity(j => j.ToTable("DrawerProduct"));
+            modelBuilder.Entity<DrawerProduct>()
+           .HasKey(dp => new { dp.ProductId, dp.DrawerId });
+
+            modelBuilder.Entity<DrawerProduct>()
+           .HasOne(dp => dp.Product)
+           .WithMany(p => p.Drawer)
+           .HasForeignKey(dp => dp.ProductId);
+
+            modelBuilder.Entity<DrawerProduct>()
+                .HasOne(dp => dp.Drawer)
+                .WithMany(d => d.Product)
+                .HasForeignKey(dp => dp.DrawerId);
         }
     }
 }

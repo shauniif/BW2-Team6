@@ -13,11 +13,15 @@ namespace BW2_Team6.Services.Classes
         {
             _db = db;
         }
-        public async Task<Locker> Create(Locker entity)
+        public async Task<Locker> Create(LockerViewModel entity)
         {
-            await _db.AddAsync(entity);
+            var locker = new Locker
+            {
+                NumberLocker = entity.NumberLocker,
+            };
+            await _db.AddAsync(locker);
             await _db.SaveChangesAsync();
-            return entity;
+            return locker;
         }
 
         public async Task<Locker> Delete(int id)
@@ -28,16 +32,25 @@ namespace BW2_Team6.Services.Classes
             return locker;
         }
 
-        public async Task<IEnumerable<Locker>> GetAll()
+        public async Task<IEnumerable<LockerViewModel>> GetAll()
         {
                var lockers = await _db.Locker
                 .ToListAsync();
-            foreach(var locker in lockers) {
+            var lockerV = new List<LockerViewModel>();
+
+            foreach(var locker in lockers)
+            {
+                lockerV.Add(new LockerViewModel
+                { Id = locker.Id,
+                    NumberLocker = locker.NumberLocker,
+                });
+            }
+            foreach(var locker in lockerV) {
                 locker.Drawer = await _db.Drawers.Include(x => x.Locker)
                     .Where(x => x.Locker.Id == locker.Id)
                     .ToListAsync();
             }
-            return lockers;
+            return lockerV;
         }
 
         public async Task<Locker> Read(int id)
@@ -50,7 +63,27 @@ namespace BW2_Team6.Services.Classes
             return locker;
         }
 
-        public async Task<Locker> Update(int id, Locker entity)
+        public async Task<LockerViewModel> ReadV(int id)
+        {
+            var locker = await _db.Locker.FirstOrDefaultAsync(locker => locker.Id == id);
+            if (locker == null)
+            {
+                throw new Exception("Locker not found");
+            }
+            var lockerV = new LockerViewModel
+            {
+                Id = locker.Id,
+                NumberLocker = locker.NumberLocker,
+
+            };
+
+            lockerV.Drawer = await _db.Drawers.Include(x => x.Locker)
+                    .Where(x => x.Locker.Id == locker.Id)
+                    .ToListAsync();
+            return lockerV;
+        }
+
+        public async Task<Locker> Update(int id, LockerViewModel entity)
         {
             var locker = await Read(id);
             locker.NumberLocker = entity.NumberLocker;
