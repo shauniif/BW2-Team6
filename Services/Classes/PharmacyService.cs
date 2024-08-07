@@ -30,7 +30,7 @@ namespace BW2_Team6.Services
 
         public async Task<Product> CreateProduct(Product product)
         {
-            _db.Products.Add(product);
+            await _db.Products.AddAsync(product);
             await _db.SaveChangesAsync();
             return product;
         }

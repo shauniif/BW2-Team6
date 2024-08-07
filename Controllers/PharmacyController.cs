@@ -22,19 +22,20 @@ namespace BW2_Team6.Controllers
             return View(products);
         }
 
-        [HttpGet]
+
         public IActionResult CreateProduct()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct(Product product)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProduct(Product product)
         {
             if (ModelState.IsValid)
             {
                 await _pharmacyService.CreateProduct(product);
-                return RedirectToAction("AllProducts", "Pharmacy");
+                return RedirectToAction("AllProducts");
             }
             return View(product);
         }
