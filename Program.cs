@@ -24,7 +24,7 @@ builder.Services.
                   opt.AddPolicy(Policies.IsVeterinarian, cfg => cfg.RequireRole("Veterinario"));
                   opt.AddPolicy(Policies.IsPharmacist, cfg => cfg.RequireRole("Farmacista"));
               });
-var conn = builder.Configuration.GetConnectionString("SqlServer")!;
+var conn = builder.Configuration.GetConnectionString("SqlServerMac")!;
 builder.Services
     .AddDbContext<DataContext>(opt => opt.UseSqlServer(conn))
     ;
