@@ -39,6 +39,7 @@ builder.Services
     .AddScoped<IRecoverService, RecoverService>()
     .AddScoped<ICompaniesService, CompaniesService>()
     .AddScoped<IPharmacyService, PharmacyService>()
+    .AddScoped<ISellService, SellService>();
     .AddScoped<ILockerService, LockerService>()
     .AddScoped<IDrawerService, DrawerService>()
     ;

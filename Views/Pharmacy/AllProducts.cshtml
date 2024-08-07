@@ -9,6 +9,68 @@
 <p>
     <a asp-action="CreateProduct">Create New</a>
 </p>
+
+<form asp-action="SellProducts" asp-controller="Sell">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeOfProduct)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeOfUse)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedProducts" value="@item.Id" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeOfProduct)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeOfUse)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.PrimaryKey }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.PrimaryKey }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.PrimaryKey })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="form-group">
+        <label for="OwnerId">Seleziona cliente</label>
+        <select id="OwnerId" name="OwnerId" class="form-control" asp-items="ViewBag.Owners">
+            <option value="0">-- Seleziona Cliente --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="NumberOfRecipe">Numero di ricetta</label>
+        <input type="text" id="NumberOfRecipe" name="numberOfRecipe" class="form-control" />
+    </div>
+    <button type="submit">Procedi con la vendita</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
