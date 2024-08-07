@@ -39,6 +39,7 @@ namespace BW2_Team6.Services.Classes
                     Animal = animal,
                     DateRecover = DateTime.Now,
                     Image = ConvertImage(entity.Image),
+                    IsActive = entity.IsActive,
                 };
                 await _db.Recovers.AddAsync(recover);
                 await _db.SaveChangesAsync();
@@ -81,8 +82,21 @@ namespace BW2_Team6.Services.Classes
         {
             var recover = await Read(id);
             recover.Image = ConvertImage(entity.Image);
+            recover.IsActive = entity.IsActive;
             _db.Recovers.Update(recover);
             await _db.SaveChangesAsync();
+            return recover;
+        }
+
+        public async Task<Recover> SearchAnimalByMicrochip(string microchip)
+        {
+            var recover = await _db.Recovers
+                .AsNoTracking()
+                .Include(r => r.Animal).FirstOrDefaultAsync(r => r.Animal.Microchip == microchip);
+            if (recover == null)
+            {
+                throw new Exception("Recover not found");
+            }
             return recover;
         }
     }

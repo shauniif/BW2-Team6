@@ -74,5 +74,10 @@ namespace BW2_Team6.Controllers
             var recover = await _recoverSvc.Delete(id);
             return RedirectToAction("AllRecovers", "Recover");
         }
+
+        public IActionResult SearchYourAnimal()
+        {
+             return View(); 
+        }
     }
 }

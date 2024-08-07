@@ -1,5 +1,5 @@
-﻿let path = '/api/VisitApi';
-
+﻿let pathVisit = '/api/VisitApi';
+let pathRecover = '/api/RecoverApi'
 $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); 
     var animalId = button.data('animal-id'); 
@@ -7,8 +7,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     var buttonVisit = $('#buttonVisit') 
 
     $.ajax({
-        url: `${path
-            }/${animalId}`,
+        url: `${pathVisit}/${animalId}`,
         type: 'GET',
         success: (data) => {
             var visitsTableBody = modal.find('#visitsTableBody');
@@ -32,3 +31,26 @@ $('#exampleModal').on('show.bs.modal', function (event) {
         }
     });
 });
+
+$("#researchM").on('click', () => {
+    let microchip = $("#microchipValue").val();
+
+    $.ajax({
+        url: `${pathRecover}/${microchip}`,
+        method: 'GET',
+        success: (data) => {
+            console.log(data)
+            let dataDiv = $("#information")
+            dataDiv.empty();
+            dataDiv.append(`
+            <img src="${data.image}">
+            <p>${data.animal.name}<p>
+            <p>${data.animal.dateRegister}<p>
+            <p>${data.animal.type}<p>
+            <p>${data.dateRecover}<p>
+            <p>${data.isActive}<p>
+            `)
+        }
+    })
+})
+

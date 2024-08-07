@@ -4,5 +4,7 @@
     {
         public string? ExistingImagePath { get; set; }
         public IFormFile Image { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

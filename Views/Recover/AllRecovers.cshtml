@@ -18,7 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateRecover)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +32,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateRecover)
             </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <p>Attivo</p>
+                    }
+                    else
+                    {
+                        <p>Non attivo</p>
+                    }
+                </td>
             <td>
                     @Html.ActionLink("Update", "Update", new { id=item.Id}) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
