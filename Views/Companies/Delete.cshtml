@@ -1,4 +1,4 @@
-﻿@model BW2_Team6.Models.Recover
+﻿@model BW2_Team6.Models.Company
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,12 +8,9 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Recover</h4>
+    <h4>Company</h4>
     <hr />
     <dl class="row">
-        <dd class = "col-sm-10">
-            <img src="@Model.Image"/>
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id)
         </dt>
@@ -21,14 +18,26 @@
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateRecover)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateRecover)
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneCompany)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneCompany)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
         </dd>
     </dl>
     
-    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+    <form asp-action="DeleteConfirmed">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>

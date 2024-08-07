@@ -1,11 +1,14 @@
 ﻿using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsVeterinarian)]
     public class VisitController : Controller
     {
+
         private readonly IVisitService _visitSvc;
         public VisitController(IVisitService visitService)
         {

@@ -36,6 +36,7 @@ builder.Services
     .AddScoped<IAnimalService, AnimalService>()
     .AddScoped<IVisitService, VisitService>()
     .AddScoped<IRecoverService, RecoverService>()
+    .AddScoped<ICompaniesService, CompaniesService>()
     ;
 
 var app = builder.Build();
