@@ -46,8 +46,24 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Companies" asp-action="AllCompanies">Ditte</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pharmacy" asp-action="AllProducts">Farmacia</a>
+                        <li>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Sells" asp-action="AllSells">Vendite</a>
                         </li>
+                        @if (User.Identity?.IsAuthenticated ?? true)
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                            </li>
+                        }
+
                     </ul>
                     @if (User.Identity?.IsAuthenticated ?? false)
                     {

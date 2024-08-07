@@ -7,10 +7,11 @@ namespace BW2_Team6.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        public List<User> Users { get; set; } = [];
+        public List<User> Users { get; set; } = new List<User>();
     }
 }

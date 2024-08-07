@@ -9,10 +9,10 @@ namespace BW2_Team6.Models
         public int Id { get; set; }
 
         [Required]
-        public Owner Owner { get; set; }
+        public Owner? Owner { get; set; }
 
         [Required]
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
 
         [Column(TypeName = "char(10)")]
         public string? NumberOfRecipe {  get; set; }

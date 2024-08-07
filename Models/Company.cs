@@ -9,13 +9,13 @@ namespace BW2_Team6.Models
         public int Id { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Column(TypeName = "char(10)")]
-        public string PhoneCompany {  get; set; }
+        public string? PhoneCompany {  get; set; }
 
         [StringLength(80)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
     }
 }

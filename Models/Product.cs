@@ -9,17 +9,17 @@ namespace BW2_Team6.Models
         public int Id { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [StringLength(50)]
-        public string TypeOfProduct { get; set; }
+        public string? TypeOfProduct { get; set; }
 
         [StringLength(50)]
-        public string TypeOfUse { get; set; }
+        public string? TypeOfUse { get; set; }
 
-        public Company Company { get; set; } 
+        public Company? Company { get; set; } 
 
-        public List<Sell> Sells { get; set; } = [];
+        public List<Sell> Sells { get; set; } = new List<Sell>();
 
     }
 }

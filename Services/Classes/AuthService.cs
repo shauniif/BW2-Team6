@@ -90,7 +90,7 @@ namespace BW2_Team6.Services.Classes
                 {
                     Name = user.Name,
                     Email = user.Email,
-                    Roles = user.Roles.ToList()
+                    Roles = user.Roles.ToList(),
                 };
                 return userResulted;
 
