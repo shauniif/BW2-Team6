@@ -73,8 +73,17 @@ namespace BW2_Team6.Services
 
         public async Task<IEnumerable<Sell>> GetSellsByFiscalCode (string fiscalcode)
         {
-            return await _db.Sells.Where(s => s.Owner.FiscalCode == fiscalcode).ToListAsync();
+            return await _db.Sells
+                .Include(s => s.Product)
+                .Include(s => s.Owner)
+                .Where(s => s.Owner.FiscalCode == fiscalcode)
+                .ToListAsync();
         }
+        public async Task<IEnumerable<Sell>> GetSellsByDate (DateOnly data )
+        {
+            throw new NotImplementedException();
+        }
+
 
     }
 }

@@ -27,7 +27,7 @@ namespace BW2_Team6.Models
 
         public List<Animal> Animals { get; set; } = new List<Animal>();
 
-        public List<Sell> Sells { get; set; } = new List<Sell>();
+    //    public List<Sell> Sells { get; set; } = new List<Sell>();
 
 
     }

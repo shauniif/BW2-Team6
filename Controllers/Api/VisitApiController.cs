@@ -18,7 +18,6 @@ namespace BW2_Team6.Controllers.Api
         [HttpGet("{id}")]
         public async Task<IActionResult> DetailsVisit(int id)
         {
-
             var visits = await _visitSvc.AllVisitByAnimalId(id);
             return Ok(visits);
         }

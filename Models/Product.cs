@@ -19,7 +19,7 @@ namespace BW2_Team6.Models
 
         public Company? Company { get; set; } 
 
-        public List<Sell> Sells { get; set; } = new List<Sell>();
+      //  public List<Sell> Sells { get; set; } = new List<Sell>();
 
         public List<Drawer> Drawers { get; set; }
     }

@@ -14,6 +14,6 @@ namespace BW2_Team6.Services.Interfaces
         Task<IEnumerable<Sell>> GetSellsByCustomer(int id);
         Task<IEnumerable<Sell>> GetSellsByFiscalCode(string fiscalcode);
 
-        //fare filtri per prodotto farmaceuti e prodotti alimentari
+        Task<IEnumerable<Sell>> GetSellsByDate(DateOnly data);
     }
 }
