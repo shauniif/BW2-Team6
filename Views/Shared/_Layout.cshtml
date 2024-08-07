@@ -44,6 +44,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Recover" asp-action="AllRecovers">Ricoveri</a>
                         </li>
                         <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pharmacy" asp-action="AllProducts">Farmacia</a>
+                        <li>
+                        <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Sells" asp-action="AllSells">Vendite</a>
                         </li>
                         @if (User.Identity?.IsAuthenticated ?? true)
