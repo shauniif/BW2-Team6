@@ -27,8 +27,10 @@
 
   <ItemGroup>
     <None Remove="Views\Animal\" />
+    <None Remove="Views\Sell\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Animal\" />
+    <Folder Include="Views\Sell\" />
   </ItemGroup>
 </Project>
