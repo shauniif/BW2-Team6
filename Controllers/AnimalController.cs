@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BW2_Team6.Context;
 using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsVeterinarian)]
     public class AnimalController : Controller
     {
         private readonly IAnimalService _animalService;

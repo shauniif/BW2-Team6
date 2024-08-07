@@ -37,6 +37,7 @@ builder.Services
     .AddScoped<IAnimalService, AnimalService>()
     .AddScoped<IVisitService, VisitService>()
     .AddScoped<IRecoverService, RecoverService>()
+    .AddScoped<ICompaniesService, CompaniesService>()
     .AddScoped<IPharmacyService, PharmacyService>()
     ;
 
