@@ -40,6 +40,8 @@ builder.Services
     .AddScoped<ICompaniesService, CompaniesService>()
     .AddScoped<IPharmacyService, PharmacyService>()
     .AddScoped<ISellService, SellService>();
+    .AddScoped<ILockerService, LockerService>()
+    ;
 
 var app = builder.Build();
 

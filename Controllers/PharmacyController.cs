@@ -29,7 +29,17 @@ namespace BW2_Team6.Controllers
             return View(products);
         }
 
-
+        [HttpGet]
+        public async Task<IActionResult> DetailProduct(int id)
+        {
+            var product = await _pharmacyService.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+        
         public async Task<IActionResult> CreateProduct()
         {
             var companies = await _companiesSvc.GetAll();
@@ -62,18 +72,23 @@ namespace BW2_Team6.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProduct(int id)
         {
+            var companies = await _companiesSvc.GetAll();
+            ViewBag.Companies = new SelectList(companies, "Id", "Name");
             var product = await _pharmacyService.GetProductById(id);
             return View(product);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> EditProduct(int id, Product product)
+        public async Task<ActionResult<Product>> EditProduct(int id, Product product , int companyId)
         {
+            product.Company = await _companiesSvc.Read(companyId);
             var updatedProduct = await _pharmacyService.UpdateProduct(id, product);
             if (updatedProduct == null)
             {
                 return NotFound();
             }
+            var companies = await _companiesSvc.GetAll();
+            ViewBag.Companies = new SelectList(companies, "Id", "Name");
             return RedirectToAction("AllProducts", "Pharmacy");
         }
 
