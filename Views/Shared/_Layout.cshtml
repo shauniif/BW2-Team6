@@ -50,8 +50,12 @@
                         <li>
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Sells" asp-action="AllSells">Vendite</a>
-                        </li><li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Locker" asp-action="AllLockers">Cassetti</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Drawer" asp-action="AllDrawers">Cassetti</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Locker" asp-action="AllLockers">Armadietti</a>
                         </li>
                         @if (User.Identity?.IsAuthenticated ?? true)
                         {
