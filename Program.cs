@@ -39,6 +39,7 @@ builder.Services
     .AddScoped<IRecoverService, RecoverService>()
     .AddScoped<ICompaniesService, CompaniesService>()
     .AddScoped<IPharmacyService, PharmacyService>()
+    .AddScoped<ILockerService, LockerService>()
     ;
 
 var app = builder.Build();
