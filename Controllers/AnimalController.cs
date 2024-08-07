@@ -107,6 +107,7 @@ namespace BW2_Team6.Controllers
 
             return View(updateAnimal);
         }
+
     }
 }
 
