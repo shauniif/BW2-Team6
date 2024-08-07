@@ -21,5 +21,12 @@ namespace BW2_Team6.Controllers.Api
             var visit = await _pharmacySvc.GetSellsByFiscalCode(fiscalcode);
             return Ok(visit);
         }
+
+        [HttpGet("SearchProduct/{id}")]
+        public async Task<IActionResult> SearchProduct(int id)
+        {
+            var product = await _pharmacySvc.SearchProduct(id);
+            return Ok(product);
+        }
     }
 }

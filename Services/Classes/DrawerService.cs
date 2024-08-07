@@ -102,39 +102,6 @@ namespace BW2_Team6.Services.Classes
 
         }
 
-        public async Task<Drawer> SearchProduct(int id)
-        {
-            var drawer = await _db.Drawers
-          .Include(d => d.Locker)
-          .Include(d => d.Product)
-          .ThenInclude(dp => dp.Product)
-          .Where(d => d.Product.Any(p => p.ProductId == id))
-          .Select(d => new Drawer
-          {
-              Id = d.Id,
-              Locker = new Locker
-              {
-                  Id = d.Locker.Id,
-                  NumberLocker = d.Locker.NumberLocker
-              },
-              Product = d.Product.Select(dp => new DrawerProduct
-              {
-                  ProductId = dp.ProductId,
-                  Product = new Product
-                  {
-                      Id = dp.Product.Id,
-                      Name = dp.Product.Name
-                  }
-              }).ToList()
-          })
-          .FirstOrDefaultAsync();
-
-            if (drawer == null)
-            {
-                throw new Exception("drawer not found");
-            }
-
-            return drawer;
-        }
+       
     }
 }

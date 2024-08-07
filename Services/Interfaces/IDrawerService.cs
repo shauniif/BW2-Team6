@@ -12,7 +12,5 @@ namespace BW2_Team6.Services.Classes
         Task<Drawer> Update(int id, DrawerViewModel entity);
 
         Task<Drawer> Delete(int id);
-
-       Task<Drawer> SearchProduct(int id);
     }
 }

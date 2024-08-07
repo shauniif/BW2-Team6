@@ -15,5 +15,7 @@ namespace BW2_Team6.Services.Interfaces
         Task<IEnumerable<Sell>> GetSellsByFiscalCode(string fiscalcode);
 
         Task<IEnumerable<Sell>> GetSellsByDate(DateOnly data);
+
+        Task<Product> SearchProduct(int id);
     }
 }

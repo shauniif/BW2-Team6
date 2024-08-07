@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Threading.Tasks;
 
 namespace BW2_Team6.Services
@@ -84,6 +85,39 @@ namespace BW2_Team6.Services
             throw new NotImplementedException();
         }
 
+        public async Task<Product> SearchProduct(int id)
+        {
+            var product = await _db.Products
+                .Include(p => p.Drawer)
+                .ThenInclude(dp => dp.Drawer)
+                .ThenInclude(d => d.Locker)
+                .Where(p => p.Id == id)
+                .Select(p => new Product
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Drawer = p.Drawer.Select(dp => new DrawerProduct
+                    {
+                        Drawer = new Drawer
+                        {
+                            Id = dp.Drawer.Id,
+                            Locker = new Locker
+                            {
+                                Id = dp.Drawer.Locker.Id,
+                                NumberLocker = dp.Drawer.Locker.NumberLocker
+                            }
+                        }
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
 
+            if (product == null)
+            {
+                throw new Exception("product not found");
+            }
+            return product;
+
+
+        }
     }
 }
