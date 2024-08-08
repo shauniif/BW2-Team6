@@ -31,5 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Animal\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 </Project>
