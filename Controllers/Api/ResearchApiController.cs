@@ -6,11 +6,11 @@ namespace BW2_Team6.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SellApiController : ControllerBase
+    public class ResearchApiController : ControllerBase
     {
         private readonly IPharmacyService _pharmacySvc;
 
-        public SellApiController(IPharmacyService pharmacySvc)
+        public ResearchApiController(IPharmacyService pharmacySvc)
         {
             _pharmacySvc = pharmacySvc;
         }
@@ -28,5 +28,15 @@ namespace BW2_Team6.Controllers.Api
             var product = await _pharmacySvc.SearchProduct(id);
             return Ok(product);
         }
+
+        [HttpGet("SellByDate/{data}")]
+
+        public async Task<IActionResult> SellByDate(DateTime data)
+        {
+            var sell = await _pharmacySvc.GetSellsByDate(data);
+            return Ok(sell);
+        }
+
+
     }
 }

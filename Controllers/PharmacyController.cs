@@ -57,12 +57,10 @@ namespace BW2_Team6.Controllers
                 ModelState.AddModelError("Company", "Please select a company.");
             }
 
-            if (ModelState.IsValid)
-            {
                 product.Company = await _companiesSvc.Read(companyId);
                 await _pharmacyService.CreateProduct(product);
                 return RedirectToAction("AllProducts");
-            }
+            
 
             var companies = await _companiesSvc.GetAll();
             ViewBag.Companies = new SelectList(companies, "Id", "Name");

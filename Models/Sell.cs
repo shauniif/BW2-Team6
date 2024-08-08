@@ -16,5 +16,8 @@ namespace BW2_Team6.Models
 
         [Column(TypeName = "char(10)")]
         public string? NumberOfRecipe {  get; set; }
+
+        [Required]  
+        public DateTime DateSell { get; set; }
     }
 }

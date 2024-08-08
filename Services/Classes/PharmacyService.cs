@@ -1,4 +1,5 @@
 ﻿using BW2_Team6.Context;
+using BW2_Team6.Migrations;
 using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -80,9 +81,13 @@ namespace BW2_Team6.Services
                 .Where(s => s.Owner.FiscalCode == fiscalcode)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<Sell>> GetSellsByDate (DateOnly data )
+        public async Task<IEnumerable<Sell>> GetSellsByDate (DateTime data )
         {
-            throw new NotImplementedException();
+            return await _db.Sells
+                .Include(s => s.Product)
+                .Include(s => s.Owner)
+                .Where(s => s.DateSell.Date == data.Date)
+                .ToListAsync();
         }
 
         public async Task<Product> SearchProduct(int id)

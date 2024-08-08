@@ -93,6 +93,10 @@ namespace BW2_Team6.Controllers
             return RedirectToAction("AllDrawers");
         }
 
-
+        public async Task<IActionResult> SearchProductInDrawer()
+        {
+            var products = await _pharmacySvc.GetAllProducts();
+            return View(products);
+        }
     }
 }
