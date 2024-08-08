@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using BW2_Team6.Context;
 using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
@@ -37,7 +34,7 @@ namespace BW2_Team6.Controllers
         {
             var owners = await _ownerService.GetAll();
             ViewBag.Owners = new SelectList(owners, "Id", "FirstName");
-            return View();
+            return PartialView();
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -57,7 +54,7 @@ namespace BW2_Team6.Controllers
                 return NotFound();
             }
 
-            return View(animal);
+            return PartialView(animal);
         }
 
         [HttpPost]
