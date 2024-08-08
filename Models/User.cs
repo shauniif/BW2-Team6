@@ -12,8 +12,9 @@ namespace BW2_Team6.Models
         [StringLength(30)]
         public required string Name { get; set; }
 
+        [Required]
         [EmailAddress(ErrorMessage = "Tipo di email non valido")]
-        public string? Email { get; set; }
+        public required string Email { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(max)")]

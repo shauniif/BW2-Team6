@@ -15,6 +15,14 @@ namespace BW2_Team6.Controllers.Api
             _recoverSvc = recoverService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GettAllRecover()
+        {
+            var recovers = await _recoverSvc.GetAllActive();
+            return Ok(recovers);
+        }
+
+
         [HttpGet("{microchip}")]
         public async Task<IActionResult> SearchAnimalByMicrochip(string microchip)
         {

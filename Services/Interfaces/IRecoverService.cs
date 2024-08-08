@@ -14,6 +14,8 @@ namespace BW2_Team6.Services.Interfaces
 
         Task<IEnumerable<Recover>> GetAll();
 
+        Task<IEnumerable<Recover>> GetAllActive();
+
         Task<Recover> SearchAnimalByMicrochip(string microchip);
     }
 }

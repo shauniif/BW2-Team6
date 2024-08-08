@@ -66,6 +66,15 @@ namespace BW2_Team6.Services.Classes
                 .ToListAsync();
             return recovers;
         }
+        public async Task<IEnumerable<Recover>> GetAllActive()
+        {
+            var recovers = await _db.Recovers
+                .AsNoTracking()
+                .Include(r => r.Animal)
+                .Where(r => r.IsActive)
+                .ToListAsync();
+            return recovers;
+        }
 
         public async Task<Recover> Read(int id)
         {

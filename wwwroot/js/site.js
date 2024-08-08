@@ -119,14 +119,33 @@ $(document).on('click','.ReasearchP', function() {
                 `cassetto n°: ${draw.drawer.id} nel armadietto numero ${draw.drawer.locker.numberLocker}`
             ).join(', ');
             }
-            // Costruisci la stringa del contenuto
 
             let content = `
                 Il prodotto ${data.name} si trova in ${drawerInfo}
             `;
 
-            // Aggiungi il contenuto al div
             productInf.html(content);
         }
     })
 })
+
+$(() => {
+    $.ajax({
+        url: `${pathRecover}`,
+        method: 'GET',
+        success: (data) => {
+            let infAnimal = $('#infAnimal');
+            $(data).each((_, inf) => {
+                infAnimal.append(`
+               <tr>
+                <td>${new Date(inf.dateRecover).toLocaleDateString()}</td>
+                <td><img src="${inf.image}" alt="Animal Image"></td>
+                <td>${inf.isActive ? 'Attivo' : 'Non Attivo'}</td>
+                <td><a class='btn btn-primary'>Chiama la clinica se questo è il tuo animale</a></td>
+                </tr>
+            `)
+            })
+            
+        }
+    })
+});
