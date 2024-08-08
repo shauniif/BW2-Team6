@@ -63,27 +63,25 @@ namespace BW2_Team6.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(ownerId == 0)
+                if (ownerId == 0)
                 {
                     newAnimal.Owner = null;
                 }
                 else
                 {
-                    newAnimal.Owner = await _dbContext.Owners
-                    .FindAsync(ownerId);
+                    newAnimal.Owner = await _dbContext.Owners.FindAsync(ownerId);
                 }
-                
-                await _animalService.Create(newAnimal);
 
+                await _animalService.Create(newAnimal);
                 return RedirectToAction("AllAnimals");
             }
 
-            // se il modello non è valido
-            var owners = await _ownerService.GetAll();
-            ViewBag.Owners = new SelectList(owners, "Id", "FirstName");
+            var allOwners = await _ownerService.GetAll();
+            ViewBag.Owners = new SelectList(allOwners, "Id", "FirstName");
 
             return View(newAnimal);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

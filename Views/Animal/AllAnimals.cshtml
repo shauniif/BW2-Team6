@@ -93,7 +93,7 @@
 
 <!-- Modal di Creazione Animale -->
 <div class="modal fade" id="createAnimalModal" tabindex="-1" aria-labelledby="createAnimalModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createAnimalModalLabel">Crea Nuovo Animale</h5>
@@ -101,11 +101,17 @@
             </div>
             <div class="modal-body" id="createAnimalModalBody">
                 <!-- Contenuto caricato via AJAX -->
-                <p>Caricamento in corso...</p>
+                <div class="text-center my-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Caricamento in corso...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- Modal di Modifica Animale -->
 <div class="modal fade" id="editAnimalModal" tabindex="-1" aria-labelledby="editAnimalModalLabel" aria-hidden="true">
@@ -197,6 +203,9 @@
                 deleteForm.action = '@Url.Action("Delete", "Animal")/' + animalId;
             });
         });
+
+       
+
     </script>
 }
 
