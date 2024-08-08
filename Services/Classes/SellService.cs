@@ -24,7 +24,8 @@ namespace BW2_Team6.Services.Classes
             }
 
             try
-            {
+            { 
+                newSell.DateSell = DateTime.Now;
                 await _dbContext.Sells.AddAsync(newSell);
                 await _dbContext.SaveChangesAsync();
                 return newSell;

@@ -79,5 +79,11 @@ namespace BW2_Team6.Controllers
         {
              return View(); 
         }
+        public IActionResult RecoverAnimal()
+        {
+             return View(); 
+        }
+
+       
     }
 }

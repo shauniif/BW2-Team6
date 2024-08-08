@@ -59,6 +59,11 @@ namespace BW2_Team6.Controllers
 
             return RedirectToAction("AllSells");
         }
+
+        public IActionResult SearchForPharmacist() 
+        { 
+            return View(); 
+        }
     }
 }
 
