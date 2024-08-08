@@ -2,6 +2,11 @@
 
 @{
     ViewData["Title"] = "AllProducts";
+
+    string GenerateOption(string value, string currentFilter, string text)
+    {
+        return $"<option value=\"{value}\" {(currentFilter == value ? "selected" : "")}>{text}</option>";
+    }
 }
 
 <h1>AllProducts</h1>
@@ -9,6 +14,17 @@
 <p>
     <a asp-action="CreateProduct">Create New</a>
 </p>
+
+<form method="get" asp-action="AllProducts">
+    <div class="form-group">
+        <label for="filter">Filtra per tipo di prodotto:</label>
+        <select id="filter" name="filter" class="form-control" onchange="this.form.submit()">
+            @Html.Raw(GenerateOption("all", ViewBag.Filter, "Tutti"))
+            @Html.Raw(GenerateOption("alimentari", ViewBag.Filter, "Prodotti Alimentari"))
+            @Html.Raw(GenerateOption("prodotti farmaceutici", ViewBag.Filter, "Prodotti Farmaceutici"))
+        </select>
+    </div>
+</form>
 
 <form asp-action="SellProducts" asp-controller="Sell">
     <table class="table">
@@ -51,7 +67,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "EditProduct", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "DetailsProduct", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "DetailProduct", new { id = item.Id }) |
                         @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id })
                     </td>
                 </tr>
@@ -70,52 +86,3 @@
     </div>
     <button type="submit">Procedi con la vendita</button>
 </form>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeOfProduct)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeOfUse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfProduct)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfUse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditProduct", new {  id=item.Id }) 
-                @Html.ActionLink("Detail", "DetailProduct", new {  id=item.Id }) 
-                @Html.ActionLink("Delete", "DeleteProduct", new {  id=item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

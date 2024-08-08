@@ -21,13 +21,26 @@ namespace BW2_Team6.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> AllProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> AllProducts(string filter = "all")
         {
-            var products = await _pharmacyService.GetAllProducts();
+            IEnumerable<Product> products;
+
+            if (filter == "all")
+            {
+                products = await _pharmacyService.GetAllProducts();
+            }
+            else
+            {
+                products = await _pharmacyService.GetFilteredProducts(new string[] { filter });
+            }
+
             var owner = await _ownerService.GetAll();
             ViewBag.Owners = new SelectList(owner, "Id", "FirstName");
+            ViewBag.Filter = filter;
             return View(products);
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> DetailProduct(int id)
@@ -39,12 +52,12 @@ namespace BW2_Team6.Controllers
             }
             return View(product);
         }
-        
+
         public async Task<IActionResult> CreateProduct()
         {
             var companies = await _companiesSvc.GetAll();
             ViewBag.Companies = new SelectList(companies, "Id", "Name");
-
+            ViewBag.ProductTypes = new SelectList(new List<string> { "alimentari", "prodotti farmaceutici" });
             return View();
         }
 
@@ -54,41 +67,58 @@ namespace BW2_Team6.Controllers
         {
             if (companyId == 0)
             {
-                ModelState.AddModelError("Company", "Please select a company.");
+                ViewBag.ErrorMessage = "Please select a company.";
+                var companies = await _companiesSvc.GetAll();
+                ViewBag.Companies = new SelectList(companies, "Id", "Name");
+                ViewBag.ProductTypes = new SelectList(new List<string> { "alimentari", "prodotti farmaceutici" });
+                return View(product);
             }
 
-                product.Company = await _companiesSvc.Read(companyId);
-                await _pharmacyService.CreateProduct(product);
-                return RedirectToAction("AllProducts");
-            
-
-            var companies = await _companiesSvc.GetAll();
-            ViewBag.Companies = new SelectList(companies, "Id", "Name");
-            return View(product);
+            product.Company = await _companiesSvc.Read(companyId);
+            await _pharmacyService.CreateProduct(product);
+            return RedirectToAction("AllProducts");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> EditProduct(int id)
         {
             var companies = await _companiesSvc.GetAll();
             ViewBag.Companies = new SelectList(companies, "Id", "Name");
+            ViewBag.ProductTypes = new SelectList(new List<string> { "alimentari", "prodotti farmaceutici" });
+
             var product = await _pharmacyService.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
             return View(product);
         }
 
+
         [HttpPost]
-        public async Task<ActionResult<Product>> EditProduct(int id, Product product , int companyId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProduct(int id, Product product, int companyId)
         {
+            if (companyId == 0)
+            {
+                ViewBag.ErrorMessage = "Please select a company.";
+                var companies = await _companiesSvc.GetAll();
+                ViewBag.Companies = new SelectList(companies, "Id", "Name");
+                ViewBag.ProductTypes = new SelectList(new List<string> { "alimentari", "prodotti farmaceutici" });
+                return View(product);
+            }
+
             product.Company = await _companiesSvc.Read(companyId);
             var updatedProduct = await _pharmacyService.UpdateProduct(id, product);
             if (updatedProduct == null)
             {
                 return NotFound();
             }
-            var companies = await _companiesSvc.GetAll();
-            ViewBag.Companies = new SelectList(companies, "Id", "Name");
             return RedirectToAction("AllProducts", "Pharmacy");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> DeleteProduct(int id)

@@ -18,5 +18,7 @@ namespace BW2_Team6.Services.Interfaces
 
         Task<Product> SearchProduct(int id);
 
+        Task<IEnumerable<Product>> GetFilteredProducts(string[] productTypes);
+
     }
 }

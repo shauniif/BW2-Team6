@@ -121,8 +121,13 @@ namespace BW2_Team6.Services
                 throw new Exception("product not found");
             }
             return product;
-
-
+        }
+        public async Task<IEnumerable<Product>> GetFilteredProducts(string[] productTypes)
+        {
+            return await _db.Products
+                .Include(p => p.Company)
+                .Where(p => productTypes.Contains(p.TypeOfProduct))
+                .ToListAsync();
         }
     }
 }

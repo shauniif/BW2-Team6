@@ -10,29 +10,27 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditProduct">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="EditProduct" method="post">
+            <div class="text-danger">@ViewBag.ErrorMessage</div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TypeOfProduct" class="control-label"></label>
-                <input asp-for="TypeOfProduct" class="form-control" />
-                <span asp-validation-for="TypeOfProduct" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TypeOfUse" class="control-label"></label>
-                <input asp-for="TypeOfUse" class="form-control" />
-                <span asp-validation-for="TypeOfUse" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="CompanyId">Seleziona Ditta</label>
                 <select id="CompanyId" name="CompanyId" class="form-control" asp-items="ViewBag.Companies">
                     <option value="0">-- Seleziona ditta --</option>
                 </select>
-                <span asp-validation-for="Company" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfProduct" class="control-label">Type Of Product</label>
+                <select asp-for="TypeOfProduct" class="form-control" asp-items="ViewBag.ProductTypes">
+                    <option value="">-- Seleziona tipo di prodotto --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfUse" class="control-label"></label>
+                <input asp-for="TypeOfUse" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -46,5 +44,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
