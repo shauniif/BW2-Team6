@@ -49,12 +49,27 @@ $("#researchM").on('click', () => {
             let dataDiv = $("#information")
             dataDiv.empty();
             dataDiv.append(`
-            <img src="${data.image}">
-            <p>${data.animal.name}<p>
-            <p>${data.animal.dateRegister}<p>
-            <p>${data.animal.type}<p>
-            <p>${data.dateRecover}<p>
-            <p>${data.isActive}<p>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="${data.image}" class="img-fluid rounded-start" alt="Animal Image"">
+                    </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                             <h5 class="card-title">${data.animal.name}</h5>
+                                <p class="card-text"><strong>Data di registrazione:</strong> ${new Date(data.animal.dateRegister).toLocaleDateString()}</p>
+                                     <p class="card-text"><strong>Tipo:</strong> ${data.animal.type}</p>
+                            <p class="card-text"><strong>Data di recupero:</strong> ${new Date(data.dateRecover).toLocaleDateString()}</p>
+                        <p class="card-text">
+                            <strong>Stato:</strong> 
+                        <span class="badge ${data.isActive ? 'bg-success' : 'bg-danger'}">
+                            ${data.isActive ? 'Attivo' : 'Non Attivo'}
+                            </span>
+                        </p>
+                    </div>
+                    </div>
+                    </div>
+                </div>
             `)
         }
     })
@@ -124,15 +139,19 @@ $(document).on('click','.ReasearchP', function() {
             let drawerInfo;
             if (data.drawer.length == 0) {
 
-                drawerInfo = `non si trova da nessuna parte.`
+                drawerInfo = `<span class="text-danger">non si trova da nessuna parte.</span>`;
             } else {
                 drawerInfo = data.drawer.map(draw =>
-                `cassetto n°: ${draw.drawer.id} nel armadietto numero ${draw.drawer.locker.numberLocker}`
+                    `<span class="shadow-sm mb-1">Cassetto n°: ${draw.drawer.id} nell'armadietto numero ${draw.drawer.locker.numberLocker}</span>`
             ).join(', ');
             }
 
             let content = `
-                Il prodotto ${data.name} si trova in ${drawerInfo}
+                <div class="alert alert-success">
+                <h4 class="alert-heading">Informazioni sul Prodotto</h4>
+                <p><strong>Il prodotto:</strong> ${data.name}</p>
+                <p><strong>Posizione:</strong>${drawerInfo}</p>
+                </div>
             `;
 
             productInf.html(content);
@@ -149,11 +168,21 @@ $(() => {
             $(data).each((_, inf) => {
                 infAnimal.append(`
                <tr>
-                <td>${new Date(inf.dateRecover).toLocaleDateString()}</td>
-                <td><img src="${inf.image}" alt="Animal Image"></td>
-                <td>${inf.isActive ? 'Attivo' : 'Non Attivo'}</td>
-                <td><a class='btn btn-primary'>Chiama la clinica se questo è il tuo animale</a></td>
-                </tr>
+    <td>
+        <span class="d-block text-center">${new Date(inf.dateRecover).toLocaleDateString()}</span>
+    </td>
+    <td class="text-center">
+        <img src="${inf.image}" alt="Animal Image" class="img-thumbnail heightImg">
+    </td>
+    <td class="text-center">
+         <span class="badge ${inf.isActive ? 'bg-success' : 'bg-danger'}">
+            ${inf.isActive ? 'Attivo' : 'Non Attivo'}
+        </span>
+    </td>
+    <td class="text-center">
+        <a class='btn btn-primary btn-sm' href="#">Chiama la clinica se questo è il tuo animale</a>
+    </td>
+</tr>
             `)
             })
             

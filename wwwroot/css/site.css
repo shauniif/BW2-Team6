@@ -266,4 +266,6 @@ main {
     margin-left: 5em;
 }
 
-
+.heightImg {
+    max-width: 20rem;
+}

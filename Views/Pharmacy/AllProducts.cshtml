@@ -11,10 +11,17 @@
 
 <h1>AllProducts</h1>
 
-<p>
-    <a class="button-link btn-primary btn" asp-action="CreateProduct">Crea un nuovo prodotto</a>
-</p>
-
+<div class="row justify-content-center">
+    <div class="col-md-4 mb-3">
+        <a class="btn btn-primary btn-block" asp-action="CreateProduct">Crea un nuovo prodotto</a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a class="btn btn-primary btn-block" asp-action="SearchProductInDrawer" asp-controller="Drawer">Ricerca del prodotto</a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a class="btn btn-primary btn-block" asp-action="SearchForPharmacist" asp-controller="Sell">Resoconto giornaliero</a>
+    </div>
+</div>
 <form method="get" asp-action="AllProducts">
     <div class="form-group">
         <label for="filter">Filtra per tipo di prodotto:</label>
