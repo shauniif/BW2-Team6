@@ -34,7 +34,7 @@ namespace BW2_Team6.Controllers
         {
             var owners = await _ownerService.GetAll();
             ViewBag.Owners = new SelectList(owners, "Id", "FirstName");
-            return PartialView();
+            return View();
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -54,7 +54,7 @@ namespace BW2_Team6.Controllers
                 return NotFound();
             }
 
-            return PartialView(animal);
+            return View(animal);
         }
 
         [HttpPost]
