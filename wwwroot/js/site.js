@@ -71,9 +71,14 @@ $("#ResearchFC").on('click', () => {
             fiscalCodeInformation.empty();
             $(data).each((_, inf) => {
                 fiscalCodeInformation.append(`
-                    <p>Nome: ${inf.owner.firstName} ${inf.owner.lastName}</p>
-                    <p>Prodotto Acquistato: ${inf.product.name}</p>
-                    <p>Data di vendita: ${inf.dateSell}</p>
+                     <div class="card mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title">Informazioni Acquirente</h5>
+                            <p class="card-text"><strong>Nome:</strong> ${inf.owner.firstName} ${inf.owner.lastName}</p>
+                            <p class="card-text"><strong>Prodotto Acquistato:</strong> ${inf.product.name}</p>
+                            <p class="card-text"><strong>Data di Vendita:</strong> ${inf.dateSell}</p>
+                         </div>
+                    </div>
                 `);
             })
         }
@@ -92,8 +97,13 @@ $("#ResearchD").on('click', () => {
             dateInformation.empty();
             $(data).each((_, inf) => {
                 dateInformation.append(`
-                                <p>Data di vendita: ${inf.dateSell}</p>
-                                <p>Prodotto Acquistato: ${inf.product.name}</p>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Informazioni Acquirente</h5>
+                                            <p class="card-text"><strong>Prodotto Acquistato:</strong> ${inf.product.name}</p>
+                                            <p class="card-text"><strong>Data di Vendita:</strong> ${inf.dateSell}</p>
+                                    </div>
+                                </div>
                             `);
 ;
             })
