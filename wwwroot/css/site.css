@@ -23,8 +23,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background: linear-gradient(to right, #ffecd2, #fcb69f);
-    color: #333;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);;
 }
 
 /* Stile per l'intestazione */
@@ -127,3 +126,35 @@ body {
 .login-card .btn-link:hover {
     text-decoration: underline;
 }
+
+
+/*css per logo*/
+.Logoheight {
+    max-width: 5rem;
+    
+}
+
+p, h1, h2, h3, h4, h5, a {
+    color: #5D180D !important;
+}
+
+.pMargin {
+    padding: 3.8em 0;
+}
+/* CSS SEZIONE ANIMALI */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control,
+.form-select {
+    border-radius: 4px;
+    border-color: #ced4da;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+    }  

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using BW2_Team6.Context;
 using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
@@ -37,7 +34,7 @@ namespace BW2_Team6.Controllers
         {
             var owners = await _ownerService.GetAll();
             ViewBag.Owners = new SelectList(owners, "Id", "FirstName");
-            return View();
+            return PartialView();
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -57,7 +54,7 @@ namespace BW2_Team6.Controllers
                 return NotFound();
             }
 
-            return View(animal);
+            return PartialView(animal);
         }
 
         [HttpPost]
@@ -66,27 +63,25 @@ namespace BW2_Team6.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(ownerId == 0)
+                if (ownerId == 0)
                 {
                     newAnimal.Owner = null;
                 }
                 else
                 {
-                    newAnimal.Owner = await _dbContext.Owners
-                    .FindAsync(ownerId);
+                    newAnimal.Owner = await _dbContext.Owners.FindAsync(ownerId);
                 }
-                
-                await _animalService.Create(newAnimal);
 
+                await _animalService.Create(newAnimal);
                 return RedirectToAction("AllAnimals");
             }
 
-            // se il modello non è valido
-            var owners = await _ownerService.GetAll();
-            ViewBag.Owners = new SelectList(owners, "Id", "FirstName");
+            var allOwners = await _ownerService.GetAll();
+            ViewBag.Owners = new SelectList(allOwners, "Id", "FirstName");
 
             return View(newAnimal);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
