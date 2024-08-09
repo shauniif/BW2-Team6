@@ -1,5 +1,6 @@
 ﻿using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsPharmacist)]
     public class PharmacyController : Controller
     {
         private readonly IPharmacyService _pharmacyService;

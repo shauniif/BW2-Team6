@@ -1,9 +1,11 @@
 ﻿using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsPharmacist)]
     public class SellController : Controller
     {
         private readonly ISellService _sellService;

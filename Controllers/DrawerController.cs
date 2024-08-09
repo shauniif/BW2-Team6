@@ -1,11 +1,13 @@
 ﻿using BW2_Team6.Models;
 using BW2_Team6.Services.Classes;
 using BW2_Team6.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsPharmacist)]
     public class DrawerController : Controller
     {
         private readonly IDrawerService _drawerSvc;

@@ -1,9 +1,12 @@
 ﻿using BW2_Team6.Models;
 using BW2_Team6.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace BW2_Team6.Controllers
 {
+    [Authorize(Policies.IsVeterinarian)]
     public class RecoverController : Controller
     {
         private readonly IRecoverService _recoverSvc;
@@ -75,6 +78,7 @@ namespace BW2_Team6.Controllers
             return RedirectToAction("AllRecovers", "Recover");
         }
 
+        [AllowAnonymous]
         public IActionResult SearchYourAnimal()
         {
              return View(); 
