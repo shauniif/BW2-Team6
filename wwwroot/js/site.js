@@ -3,7 +3,7 @@ let pathRecover = '/api/RecoverApi';
 let pathLocker = '/api/LockerApi';
 let pathResearch = '/api/ResearchApi'
 
-$('#exampleModal').on('show.bs.modal', function (event) {
+$('#visiteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); 
     var animalId = button.data('animal-id'); 
     var modal = $(this);
@@ -14,8 +14,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
         type: 'GET',
         success: (data) => {
             var visitsTableBody = modal.find('#visitsTableBody');
-            visitsTableBody.empty(); 
-
+            visitsTableBody.empty();
+            console.log(data)
 
             $(data).each((_, visit) => {
                 visitsTableBody.append(
@@ -26,6 +26,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
                     '</tr>'
                 );
             });
+            buttonVisit.empty();
             buttonVisit.append(`<a class="btn btn-primary" href=/Visit/Create/${animalId}> Registra una nuova visita </a>`)
         },
 
