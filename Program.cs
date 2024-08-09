@@ -64,6 +64,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Recover}/{action=SearchYourAnimal}/{id?}");
 
 app.Run();

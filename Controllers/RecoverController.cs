@@ -84,6 +84,10 @@ namespace BW2_Team6.Controllers
              return View(); 
         }
 
-       
+       public async Task<IActionResult> ChangeStatus(int id)
+        {
+            await _recoverSvc.ChangeStatus(id);
+            return RedirectToAction("AllRecovers", "Recover");
+        }
     }
 }

@@ -108,5 +108,15 @@ namespace BW2_Team6.Services.Classes
             }
             return recover;
         }
+
+        public async Task<Recover> ChangeStatus(int id)
+        {
+            var recover = await Read(id);
+
+            recover.IsActive = !recover.IsActive;
+            _db.Recovers.Update(recover);
+            await _db.SaveChangesAsync();
+            return recover;
+        }
     }
 }
